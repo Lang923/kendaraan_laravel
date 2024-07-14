@@ -12,6 +12,7 @@ class Kendaraan extends Model
     protected $table = 'kendaraan';
     protected $primaryKey = 'no_pol';
     protected $fillable =[
+        'id',
         'no_pol',
         'no_mesin',
         'jenis_mobil',
@@ -20,7 +21,13 @@ class Kendaraan extends Model
         'kapasitas',
         'tarif',
     ];
+    public function sewa()
+    {
+        return $this->hasMany(Sewa::class, 'id', 'id');
+    }
 
-    public $incrementing = false;
-    protected $keyType = 'string';
+    public function invoice()
+    {
+        return $this->hasMany(Invoice::class, 'id', 'id');
+    }
 }

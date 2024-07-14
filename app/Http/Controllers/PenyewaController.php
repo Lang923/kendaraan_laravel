@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Penyewa;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class PenyewaController extends Controller
 {
@@ -25,7 +26,10 @@ class PenyewaController extends Controller
             'no_hp' => 'required|string|max:15',
         ]);
         Penyewa::create($request->all());
-        return redirect()->route('penyewa.index')->with('success', 'penyewa created succesfully');
+
+        // Alert Notification
+        Alert::success('Sukses', 'Penyewa Berhasil Ditambahkan');
+        return redirect()->route('penyewa.index');
     }
 
     //untuk mengedit
@@ -34,22 +38,28 @@ class PenyewaController extends Controller
         return view('penyewa.edit', compact('penyewa'));
     }
 
-    public function update(Request $request, $id_penyewa) {
+    public function update(Request $request, $id) {
         $request->validate([
-            'nama_penyewa',
-            'alamat',
-            'no_hp',
+            'nama_penyewa' => 'required|string|max:100',
+            'alamat' => 'required|string',
+            'no_hp' => 'required|string|max:15',
         ]);
         
-        $penyewa = Penyewa::findOrFail($id_penyewa);
+        $penyewa = Penyewa::findOrFail($id);
         $penyewa->update($request->all());
-        return redirect()->route('penyewa.index')->with('success', 'penyewa update succesfully');
+
+        // Alert Notification
+        Alert::success('Sukses', 'Penyewa Berhasil Di Update');
+        return redirect()->route('penyewa.index');
     }
     
     // untuk menghapus
-    public function destroy($id_penyewa) {
-        $penyewa = Penyewa::findOrFail($id_penyewa);
+    public function destroy($id) {
+        $penyewa = Penyewa::findOrFail($id);
         $penyewa->delete();
-        return redirect()->route('penyewa.index')->with('success', 'penyewa deleted successfully.');
+
+        // Alert Notification
+        Alert::success('Sukses', 'Penyewa Berhasil Dihapus');
+        return redirect()->route('penyewa.index');
     }
 }

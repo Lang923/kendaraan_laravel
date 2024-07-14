@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container">
-        <h1>Tambah Kwitansi</h1>
+        <h1 class="my-4">Tambah Kwitansi</h1>
         <form action="{{ route('kwitansi.store') }}" method="POST">
             @csrf
             <div class="form-group">

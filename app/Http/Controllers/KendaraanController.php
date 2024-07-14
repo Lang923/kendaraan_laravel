@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Kendaraan;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
+
 
 class KendaraanController extends Controller
 {
@@ -29,7 +31,10 @@ class KendaraanController extends Controller
             'tarif' => 'required|integer',
         ]);
         Kendaraan::create($request->all());
-        return redirect()->route('kendaraan.index')->with('success', 'Kendaraan created succesfully');
+
+        // Alert Notification
+        Alert::success('Sukses', 'Kendaraan Berhasil Ditambahkan');
+        return redirect()->route('kendaraan.index');
     }
 
     //untuk mengedit
@@ -51,14 +56,18 @@ class KendaraanController extends Controller
         
         $kendaraan = Kendaraan::findOrFail($no_pol);
         $kendaraan->update($request->all());
-        return redirect()->route('kendaraan.index')->with('success', 'Kendaraan update succesfully');
+        
+        Alert::success('Sukses', 'Kendaraan Berhasil Diupdate');
+        return redirect()->route('kendaraan.index');
     }
     
     // untuk menghapus
     public function destroy($no_pol) {
         $kendaraan = Kendaraan::findOrFail($no_pol);
         $kendaraan->delete();
-        return redirect()->route('kendaraan.index')->with('success', 'Kendaraan deleted successfully.');
+        
+        Alert::success('Sukses', 'Kendaraan Berhasil Dihapus');
+        return redirect()->route('kendaraan.index');
     }
 
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Kwitansi;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class KwitansiController extends Controller
 {
@@ -23,29 +24,37 @@ class KwitansiController extends Controller
             'tgl_kwitansi' => 'required|date',
         ]);
         Kwitansi::create($request->all());
-        return redirect()->route('kwitansi.index')->with('success', 'Kwitansi created succesfully');
+
+        // Alert Notification
+        Alert::success('Sukses', 'Data Kwitansi Berhasil Ditambahkan');
+        return redirect()->route('kwitansi.index');
     }
 
     //untuk mengedit
-
     public function edit (Kwitansi $kwitansi ){
         return view('kwitansi.edit', compact('kwitansi'));
     }
 
-    public function update(Request $request, $id_kwitansi) {
+    public function update(Request $request, $id) {
         $request->validate([
             'tgl_kwitansi',
         ]);
         
-        $kwitansi = Kwitansi::findOrFail($id_kwitansi);
+        $kwitansi = Kwitansi::findOrFail($id);
         $kwitansi->update($request->all());
-        return redirect()->route('kwitansi.index')->with('success', 'Kwitansi update succesfully');
+
+        // Alert Notification
+        Alert::success('Sukses', 'Data Kwitansi Berhasil Di Update');
+        return redirect()->route('kwitansi.index');
     }
     
     // untuk menghapus
-    public function destroy($id_kwitansi) {
-        $kwitansi = Kwitansi::findOrFail($id_kwitansi);
+    public function destroy($id) {
+        $kwitansi = Kwitansi::findOrFail($id);
         $kwitansi->delete();
-        return redirect()->route('kwitansi.index')->with('success', 'Kwitansi deleted successfully.');
+
+        // Alert Notification
+        Alert::success('Sukses', 'Data Kwitansi Berhasil Di Hapus');
+        return redirect()->route('kwitansi.index');
     }
 }

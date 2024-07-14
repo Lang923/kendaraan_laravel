@@ -2,8 +2,8 @@
 
 @section('content')
     <div class="container">
-        <h1>Edit Kwitansi</h1>
-        <form action="{{ route('kwitansi.update', $kwitansi->id_kwitansi) }}" method="POST">
+        <h1 class="my-4">Edit Kwitansi</h1>
+        <form action="{{ route('kwitansi.update', $kwitansi->id) }}" method="POST">
             @csrf
             @method('PUT')
             <div class="form-group">

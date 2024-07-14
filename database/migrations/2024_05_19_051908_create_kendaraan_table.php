@@ -12,7 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('kendaraan', function (Blueprint $table) {
-            $table->string('no_pol', 10)->primary();
+            $table->id();
+            $table->string('no_pol', 10)->unique();
             $table->string('no_mesin', 20)->unique();
             $table->enum('jenis_mobil', ['mpv', 'city', 'suv']);
             $table->string('nama_mobil', 40);

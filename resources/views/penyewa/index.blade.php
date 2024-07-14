@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <h1>Daftar Penyewa</h1>
+    <h1 class="my-4">Daftar Penyewa</h1>
     <a href="{{ route('penyewa.create') }}" class="btn btn-primary mb-3">Tambah Penyewa</a>
     <table class="table">
         <thead class="thead-dark">
@@ -17,13 +17,13 @@
         <tbody>
             @foreach ($penyewa as $p)
                 <tr>
-                    <td>{{ $p->id_penyewa}}</td>
+                    <td>{{ $p->id}}</td>
                     <td>{{ $p->nama_penyewa }}</td>
                     <td>{{ $p->alamat }}</td>
                     <td>{{ $p->no_hp }}</td>
                     <td>
-                        <a href="{{ route('penyewa.edit', $p->id_penyewa) }}" class="btn btn-sm btn-primary">Edit</a>
-                        <form action="{{ route('penyewa.destroy', $p->id_penyewa) }}" method="POST" style="display:inline;">
+                        <a href="{{ route('penyewa.edit', $p->id) }}" class="btn btn-sm btn-primary">Edit</a>
+                        <form action="{{ route('penyewa.destroy', $p->id) }}" method="POST" style="display:inline;">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-sm btn-danger">Delete</button>
