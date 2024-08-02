@@ -31,7 +31,7 @@
                                 <a
                                     href="{{ url('/dashboard') }}"
                                     class="text-gray-600 hover:text-gray-800 mx-3">
-                                    Pemesanan
+                                    Login
                                 </a>
                             @else
                                 <a
